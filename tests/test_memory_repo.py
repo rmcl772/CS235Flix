@@ -12,13 +12,19 @@ from CS235Flix.domainmodel.review import Review
 
 def create_repo_data():
     movie_data_file = os.path.join(os.getcwd(), "data", "Data1000Movies.csv")
+    user_data_file = os.path.join(os.getcwd(), "data", "users.csv")
+    review_data_file = os.path.join(os.getcwd(), "data", "reviews.csv")
     if not os.path.exists(movie_data_file):
         movie_data_file = os.path.join(os.getcwd(), "tests", "data", "Data1000Movies.csv")
+        user_data_file = os.path.join(os.getcwd(), "tests", "data", "users.csv")
+        review_data_file = os.path.join(os.getcwd(), "tests", "data", "reviews.csv")
 
     movies = []
     actors = []
     directors = []
     genres = []
+    reviews = []
+    users = []
 
     with open(movie_data_file, "r") as data:
         movie_data = csv.DictReader(data)
@@ -49,29 +55,52 @@ def create_repo_data():
 
             movies.append(movie)
 
+    with open(review_data_file, "r") as data:
+        review_data = csv.DictReader(data)
+        for row in review_data:
+            movie = movies[int(row["Movie id"])]
+            text = row["Text"]
+            rating = float(row["Rating"])
+            user = row["User"]
+            timestamp = row["Timestamp"]
+            review_id = int(row["id"])
+
+            reviews.append(Review(movie, text, rating, user, timestamp, review_id))
+
+    with open(user_data_file, "r") as data:
+        user_data = csv.DictReader(data)
+        for row in user_data:
+            user = User(row["Name"], row["Password"])
+
+            if row["Reviews"] not in (None, ""):
+                for review in row["Reviews"].split(","):
+                    user.add_review(reviews[int(review)])
+
+            users.append(user)
+
     # remove duplicate genres
     genres = list(set(genres))
 
-    return movies, actors, directors, genres
+    return movies, actors, directors, genres, users, reviews, user_data_file, review_data_file
 
 
 def test_actor():
-    movies, actors, directors, genres = create_repo_data()
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
 
-    repo = MemoryRepo()
+    repo = MemoryRepo(user_file, review_file)
     for actor in actors:
         repo.add_actor(actor)
 
     # all actors were successfully added
-    assert len(repo._actors) == len(actors)
+    assert len(repo.get_all_actors()) == len(actors)
 
     # duplicate actor ignored
     repo.add_actor(actors[0])
-    assert len(repo._actors) == len(actors)
+    assert len(repo.get_all_actors()) == len(actors)
 
     # incorrect type ignored
     repo.add_actor(Director("Shouldn't be added"))
-    assert directors[0] not in repo._actors
+    assert directors[0] not in repo.get_all_actors()
 
     # successful retrieval of actor in repo
     retrieved_actor = repo.get_actor(actors[0].actor_full_name)
@@ -83,22 +112,22 @@ def test_actor():
 
 
 def test_director():
-    movies, actors, directors, genres = create_repo_data()
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
 
-    repo = MemoryRepo()
+    repo = MemoryRepo(user_file, review_file)
     for director in directors:
         repo.add_director(director)
 
     # all directors were successfully added
-    assert len(repo._directors) == len(directors)
+    assert len(repo.get_all_directors()) == len(directors)
 
     # duplicate director ignored
     repo.add_director(directors[0])
-    assert len(repo._directors) == len(directors)
+    assert len(repo.get_all_directors()) == len(directors)
 
     # incorrect type ignored
     repo.add_director(Actor("Shouldn't be added"))
-    assert actors[0] not in repo._directors
+    assert actors[0] not in repo.get_all_directors()
 
     # successful retrieval of director in repo
     retrieved_director = repo.get_director(directors[0].director_full_name)
@@ -110,14 +139,14 @@ def test_director():
 
 
 def test_genre():
-    movies, actors, directors, genres = create_repo_data()
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
 
-    repo = MemoryRepo()
+    repo = MemoryRepo(user_file, review_file)
     for genre in genres:
         repo.add_genre(genre)
 
     # all genres were successfully added
-    assert len(repo._genres) == len(genres)
+    assert len(repo.get_all_genres()) == len(genres)
 
     # duplicate genre ignored
     repo.add_genre(genres[0])
@@ -125,7 +154,7 @@ def test_genre():
 
     # incorrect type ignored
     repo.add_actor(Director("Shouldn't be added"))
-    assert directors[0] not in repo._genres
+    assert directors[0] not in repo.get_all_genres()
 
     # successful retrieval of genres, order does not matter
     retrieved_genres = repo.get_all_genres()
@@ -134,9 +163,9 @@ def test_genre():
 
 
 def test_movie():
-    movies, actors, directors, genres = create_repo_data()
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
 
-    repo = MemoryRepo()
+    repo = MemoryRepo(user_file, review_file)
     for movie in movies:
         repo.add_movie(movie)
 
@@ -148,6 +177,10 @@ def test_movie():
     # get a specific movie by its id
     retrieved_by_id = repo.get_movie('2')
     assert retrieved_by_id == movies[2]
+
+    # requesting a nonexistent id returns None
+    retrieved_by_id = repo.get_movie('100')
+    assert retrieved_by_id is None
 
     temp_movie = Movie("Sing", 2012, 6)
     temp_movie.add_actor(Actor("Chris Pratt"))
@@ -190,3 +223,67 @@ def test_movie():
     assert len(retrieved_by_genre) == 4
     assert all([Genre("Action") in movie.genres for movie in retrieved_by_genre])
     assert temp_movie in retrieved_by_genre
+
+
+def test_user():
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
+
+    repo = MemoryRepo(user_file, review_file)
+    for movie in movies:
+        repo.add_movie(movie)
+
+    for user in users:
+        repo.add_user(user)
+
+    # users were added correctly
+    assert len(repo._users) == len(users)
+
+    # repo ignores invalid user input
+    repo.add_user(reviews[0])
+    assert reviews[0] not in repo._users
+
+    # repo does not duplicate users
+    repo.add_user(users[0])
+    assert len(repo._users) == len(users)
+
+    # repo retrieves user by name
+    user = repo.get_user("user1")
+    assert user == users[0]
+
+    # nonexistent user returns None
+    user = repo.get_user("Nonexistent")
+    assert user is None
+
+
+def test_review():
+    movies, actors, directors, genres, users, reviews, user_file, review_file = create_repo_data()
+
+    repo = MemoryRepo(user_file, review_file)
+    for movie in movies:
+        repo.add_movie(movie)
+
+    for user in users:
+        repo.add_user(user)
+
+    for review in reviews:
+        repo.add_review(review)
+
+    # reviews were added correctly
+    assert len(repo._reviews) == len(reviews)
+
+    # repo ignores invalid input
+    repo.add_review(users[0])
+    assert users[0] not in repo._reviews
+
+    # repo doesn't duplicate reviews
+    repo.add_review(reviews[0])
+    assert len(repo._reviews) == len(reviews)
+
+    # repo gets all reviews of movie
+    retrieved_reviews = repo.get_reviews_of_movie(movies[1])
+    assert len(retrieved_reviews) == 2
+    assert all([review.movie == movies[1] for review in retrieved_reviews])
+
+    # repo gets review by id
+    retrieved_review = repo.get_review(2)
+    assert retrieved_review == reviews[2]

@@ -1,0 +1,9 @@
+Movie id,Text,Rating,User,Timestamp,id
+1,review text,5.0,user1,2020-10-11_15-44-37,0
+2,review text,5.0,user3,2020-10-11_15-47-41,1
+1,review text,5.0,user1,2020-10-11_15-49-54,2
+3,review text,5.0,user4,2020-10-11_15-50-25,3
+4,review text,5.0,user2,2020-10-11_15-51-04,4
+2,review text,5.0,user5,2020-10-11_16-17-15,5
+3,review text,5.0,user4,2020-10-11_16-42-54,6
+5,review text,5.0,user1,2020-10-11_16-44-30,7

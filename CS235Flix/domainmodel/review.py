@@ -3,7 +3,8 @@ from CS235Flix.domainmodel.movie import Movie
 
 
 class Review:
-    def __init__(self, movie: Movie, review_text: str, rating: float, user: str, timestamp: str=None, id_num: int=None):
+    def __init__(self, movie: Movie, review_text: str, rating: float, user: str, timestamp: str = None,
+                 id_num: int = None):
         if type(movie) is not Movie:
             self._movie = None
         else:
@@ -103,5 +104,6 @@ class Review:
         return f'<Review of {self._movie.title} ({self._movie.year}): {self._rating} - "{self._text}">'
 
     def __eq__(self, other):
+        if not isinstance(other, Review): return False
         return self.movie == other.movie and self.review_text == other.review_text and self.rating == other.rating and \
                self.timestamp == other.timestamp

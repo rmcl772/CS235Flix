@@ -66,7 +66,10 @@ class MemoryRepo(AbstractRepo):
         self._movies_index[str(movie.id)] = movie
 
     def get_movie(self, movie_id: int or str) -> Movie:
-        return self._movies_index[str(movie_id)]
+        try:
+            return self._movies_index[str(movie_id)]
+        except KeyError:
+            return None
 
     def get_movies_by_title(self, title: str) -> List[Movie]:
         title = title.lower()
@@ -93,6 +96,7 @@ class MemoryRepo(AbstractRepo):
 
     def add_user(self, user: User, from_file=False):
         if not isinstance(user, User): return
+        if user in self._users: return
         insort(self._users, user)
 
         if not from_file:

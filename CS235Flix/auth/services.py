@@ -8,18 +8,15 @@ class InvalidUserException(Exception): pass
 class IncorrectPasswordException(Exception): pass
 
 
-def add_user(username, password):
+def add_user(username, password, testing=False):
     if repo.repo_instance.get_user(username) is not None:
         raise NameTakenException
 
-    print(password)
-
-    password = sha256_crypt.encrypt(password)
-
-    print(password)
+    # encrypt user password
+    password = sha256_crypt.hash(password)
 
     user = User(username, password)
-    repo.repo_instance.add_user(user)
+    repo.repo_instance.add_user(user, from_file=testing)
 
 
 def get_user(username):
@@ -32,5 +29,7 @@ def get_user(username):
 
 
 def auth_user(user, password):
+    # verify password against encrypted password
     if not sha256_crypt.verify(password, user.password):
         raise IncorrectPasswordException
+

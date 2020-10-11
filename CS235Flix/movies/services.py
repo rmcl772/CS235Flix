@@ -18,6 +18,8 @@ def alphabetical_list(data: list, grid: int = False):
             name = item.actor_full_name
         elif type(item) == director.Director:
             name = item.director_full_name
+        elif type(item) == str:
+            name = item
         else:
             continue
 
