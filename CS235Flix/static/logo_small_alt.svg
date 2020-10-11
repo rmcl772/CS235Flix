@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,1.91667,2)">
+        <g transform="matrix(2.66132,0,0,2.66132,-2670.16,-642.752)">
+            <text x="1015.7px" y="287.475px" style="font-family:'Jost-SemiBold', 'Jost';font-weight:600;font-size:62.603px;fill:rgb(137,77,100);">F</text>
+        </g>
+        <g transform="matrix(0.511111,0,0,1.59079,22.9398,-3.36012)">
+            <rect x="14" y="5.687" width="15" height="73.313" style="fill:rgb(137,77,100);"/>
+        </g>
+        <g transform="matrix(0.511111,0,0,0.949702,7.60648,47.2861)">
+            <rect x="14" y="5.687" width="15" height="73.313" style="fill:rgb(137,77,100);"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,-1.91667,-2)">
+        <g transform="matrix(2.66132,0,0,2.66132,-2670.16,-642.752)">
+            <text x="1015.7px" y="287.475px" style="font-family:'Jost-SemiBold', 'Jost';font-weight:600;font-size:62.603px;fill:rgb(255,255,250);">F</text>
+        </g>
+        <g transform="matrix(0.511111,0,0,1.59079,22.9398,-3.36012)">
+            <rect x="14" y="5.687" width="15" height="73.313" style="fill:rgb(255,255,250);"/>
+        </g>
+        <g transform="matrix(0.511111,0,0,0.949702,7.60648,47.2861)">
+            <rect x="14" y="5.687" width="15" height="73.313" style="fill:rgb(255,255,250);"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,1.91667,2)">
+        <g transform="matrix(1,-0,-0,1,-1.91667,-2)">
+            <use xlink:href="#_Image1" x="15.932" y="7.699" width="96.349px" height="112.65px" transform="matrix(0.993294,0,0,0.996901,0,0)"/>
+        </g>
+    </g>
+    <defs>
+        <image id="_Image1" width="97px" height="113px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAABxCAYAAADF0M04AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACsElEQVR4nO3dT0sUYRzA8d+zTVCIJw928tItKKhTQVFBp7wGnXsPvYveQNcuXTr4EoQi7BZFikEk0j/RjNXsj5vO00HcRqm2adfm2/L9nJx1ZvfnfNnnMrtjyjlHPdsRUXa3Fu/ezx+fv+1uz+cPsfBkNu1u35y6HanVqhy/FRE/XnP+1lTe2tisOcOOFL1nz5F67tOk+WhH0e+TpFzuORkppaiGzTl+fxrK/Ecn86/nO8DnHoQcZbR676aDZgQAIwAYAcAIAEYAMAKAEQCMAGAEACMAGAHACABGADACQN/XE2geLM01PUItG8sDuKhDs/5ulX0p7SdcjgCMADB0y1HVpRvX4tSV802P0dNQRzg6OhJHRkeaHqMnlyMAIwAYAcAIAEYAMAKAEQCMAGAEACMAGAHACABGADACgBEAjABgBAAjABgBwAgAxc5tDqpSRBxqYpaBuHr6Qvcr/MfGxiJiC/phsFbsvgeKgN92oK7qGS8OF/E//H0uRwBGACi+rX3Oi3emuw90Opsx8/JZ91194uLZOHd9spHh+vXm3kysTM8i16POl6/x8MXTFBFR5O3t2Fxdr/w6x+rrpe7Wp/bav55voDrv13vv1JD20kpEuBwhGAHACABGADACgBEAjABgBAAjABgBwAgARgAwAoARAIbry+Q5x0Laf82cabn9qvvzcEVIKeYeP4Je2P81lyMAIwAM13K0z5nJy3HSu7w0a/z4RIwfn2h6jJ5cjgCMAGAEACMAGAHACABGADACgBEAjABgBAAjABgBwAgARgAwAoARAIwAYAQAIwAYAcAIAEYAMAKAEQCMAGAEACMAGAHACABGADACgBEAjABgBAAjABgBwAgARgAwAoARAIwAYASAoixz5Mq/eUip3u2C9h9fprLW8Tliz/H9qDk6xnfuL4DvZkOj4gAAAABJRU5ErkJggg=="/>
+    </defs>
+</svg>

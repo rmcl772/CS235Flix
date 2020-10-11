@@ -1,0 +1,26 @@
+{% extends 'layout.html' %} {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+<div id="container">
+    <img src="../../static/logo_big.svg" width="341" height="120">
+    <br>
+
+    <form id="general_search" action="" method="post">
+
+        {{ form.csrf_token() }}
+
+        <div class="search" id="search_input">
+            <p class="search" id="query">{{ form.query(size=30) }}</p>
+            <p class="search" id="submit">{{ form.submit(type='image', src='../../static/search_lower.svg', width=25, height=25) }}</p>
+        </div>
+
+        <div class="search" id="spacer"></div>
+
+        <div class="search" id="search_by">
+            <p class="search" id="select">{{ form.search_by }}</p>
+            <img class="search" id="down_arrow" src="../../static/down_arrow.svg" width=10 height=10>
+        </div>
+    </form>
+</div>
+{% endblock %}

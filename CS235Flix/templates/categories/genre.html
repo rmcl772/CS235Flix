@@ -1,0 +1,21 @@
+{% extends 'layout.html' %} {% block content %}
+{% if query is not none %}
+<br>
+<p id="msg">No such genre '{{ query }}'</p>
+{% endif %}
+<h2>Genres</h2>
+
+<div class="centered-h">
+    <nav id="nav">
+        {% for row in data %}
+        <div class="row">
+            {% for genre in row %}
+            <a class="btn-nav row-item genre"  href="{{ url_for('movies_bp.movies', search_by='genre', query=genre.genre_name) }}">{{ genre.genre_name }}</a>
+            <div class="v-separator"></div>
+            {% endfor %}
+        </div>
+        <div class="h-separator"></div>
+        {% endfor %}
+    </nav>
+</div>
+{% endblock %}

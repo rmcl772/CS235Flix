@@ -1,0 +1,34 @@
+#header {
+    width: 100%;
+    height: 60px;
+    background: #314159;
+    border-bottom: 10px solid #894d64;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+}
+
+#home-btn {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#categories {
+    flex: 1 0 auto;
+    flex-grow: 1;
+    display: flex;
+    justify-content: start;
+}
+
+.cat {
+    padding: 20px;
+}
+
+#user-info {
+    padding-right: 80px;
+}
+
+#register-btn {
+    padding-left: 30px;
+}

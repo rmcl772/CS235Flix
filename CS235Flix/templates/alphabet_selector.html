@@ -1,0 +1,7 @@
+<div class="centered-h">
+    <nav id="alphabet-selector">
+        {% for letter in data.keys() %}
+        <a class="letter" href="{{ request.url + '#' + letter.upper() }}">{{ letter.upper() }}</a>
+        {% endfor %}
+    </nav>
+</div>

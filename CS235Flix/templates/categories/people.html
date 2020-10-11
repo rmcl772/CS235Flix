@@ -1,0 +1,33 @@
+{% extends 'layout.html' %} {% block content %}
+{% if query is not none %}
+<br>
+<p id="msg">No such {{ type }} '{{ query }}'</p>
+
+{% endif %}
+<h2>{{ type.capitalize() }}s</h2>
+
+{% include 'alphabet_selector.html' %}
+
+<div class="centered-h">
+    <nav id="nav">
+        {% for letter in data.keys() %}
+        <a id="{{ letter.upper() }}">{{ letter.upper() }}</a>
+
+            {% for row in data[letter] %}
+            <div class="row">
+                {% for item in row %}
+
+                    {% if type == 'actor' %}
+                        <a class="btn-nav row-item" href="{{ url_for('movies_bp.movies', search_by='actor', query=item.actor_full_name) }}">{{ item.actor_full_name }}</a>
+                    {% else %}
+                        <a class="btn-nav row-item" href="{{ url_for('movies_bp.movies', search_by='director', query=item.director_full_name) }}">{{ item.director_full_name }}</a>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+        {% endfor %}
+    </nav>
+</div>
+{% endblock %}

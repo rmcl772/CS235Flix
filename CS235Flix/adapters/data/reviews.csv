@@ -1,0 +1,9 @@
+Movie id,Text,Rating,User,Timestamp,id
+168,"Very cool buddy, nice movie...",7.0,rory,2020-10-11_15-44-37,0
+168,"man, i gotta write a bunch of reviews to test this",8.0,test,2020-10-11_15-47-41,1
+168,i haven't actually watched this movie,6.0,new_user,2020-10-11_15-49-54,2
+168,i realise i dont have to keep making new accounts to write reviews,9.0,new_user,2020-10-11_15-50-25,3
+168,is that supposed to be the case? i haven't seen anything about multiple reviews on the same movie,5.0,new_user,2020-10-11_15-51-04,4
+168,"I tried really hard to get it so just the comment box would scroll, but i couldnt get it :(",4.0,new_user,2020-10-11_16-17-15,5
+272," i want to write a really long review to see how it looks so im jsut going to put some lorem ipsum here: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",5,new_user,2020-10-11_16-42-54,6
+272,i think that looks ok ^ ,7,new_user,2020-10-11_16-44-30,7

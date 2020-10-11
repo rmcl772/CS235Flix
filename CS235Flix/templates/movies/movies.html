@@ -1,0 +1,40 @@
+{% extends 'layout.html' %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/movies_list.css') }}">
+
+<div>
+    <h2>{{ title }}</h2>
+
+    <div>
+        {% for row in movies %}
+        <div class="row">
+            {% for movie in row %}
+            <div class="movie">
+                <a class="movie-content" href="{{ url_for('movie_bp.movie', movie_id=movie.id) }}">
+                    <div class="info-container">
+                        <div class="info">
+                        {{ movie.title }}
+                        <p class="movie-year">{{ movie.year }}</p>
+                        <p class="director-name">{{ movie.director.director_full_name }}</p>
+                        </div>
+                        <div class="rating-info">
+                            <i class="material-icons movie-info rating-icon">grade</i>
+                            <p class="movie-info rating">{{ movie.external_rating }}</p>
+                            {% if repo.movie_review_count(movie) == 1 %}
+                            <p class="movie-info review-count">{{ repo.movie_review_count(movie) }} review</p>
+                            {% else %}
+                            <p class="movie-info review-count">{{ repo.movie_review_count(movie) }} reviews</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <img class="poster" src="{{ movie.poster_url }}">
+                    </div>
+                </a>
+            </div>
+            <div class="separator"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

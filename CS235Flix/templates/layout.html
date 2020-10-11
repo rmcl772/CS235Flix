@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CS235Flix</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link rel="bookmark" type="image/x-icon" href="static/logo_small_alt.svg">
+        <link rel="icon" href="static/logo_small_alt.svg">
+
+    </head>
+
+    <main>
+        {% include 'header.html' %}
+        {% include 'sidebar.html' %}
+        <div id="body">
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div id="sidebar"></div>
+        </div>
+    </main>
+</html>

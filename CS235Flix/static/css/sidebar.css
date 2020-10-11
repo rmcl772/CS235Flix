@@ -1,0 +1,55 @@
+#logo {
+    display: flex;
+    justify-content: center;
+    padding: 20px 20px 0 20px;
+}
+
+#logo img {
+    width: 120px;
+    height: 120px;
+}
+
+.sidebar-spacer {
+    height: 10px;
+}
+
+#user-sidebar {
+    padding: 10px;
+}
+
+
+#watchlist {
+    display: flex;
+    flex-direction: column;
+}
+
+.watchlist-item {
+    padding-left: 10px;
+    background: #506B90;
+}
+
+.recommended {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.recommended-movie {
+    width: 190px;
+    display: flex;
+    flex-direction: row;
+}
+
+.recommended-movie-poster {
+    height: 100px;
+    padding: 10px 10px 0 10px;
+}
+
+.recommended-title {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.recommended-title p {
+}

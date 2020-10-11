@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+
+<div id="header">
+    <a id="home-btn" href="{{ url_for('home_bp.home') }}">
+        <img src="../static/logo_small.svg" width="30" height="30">
+    </a>
+
+    <nav id="categories">
+        <a class="cat" href="{{ url_for('movies_bp.category', cat='genre') }}">Genres</a>
+        <a class="cat" href="{{ url_for('movies_bp.category', cat='actor') }}">Actors</a>
+        <a class="cat" href="{{ url_for('movies_bp.category', cat='director') }}">Directors</a>
+    </nav>
+
+    <div id="user-info">
+        {% if 'username' in session %}
+        <a id="logout-btn" href="{{ url_for('auth_bp.logout') }}">logout</a>
+        {% else %}
+        <a id="login-btn" href="{{ url_for('auth_bp.login') }}">login</a>
+        <a id="register-btn" href="{{ url_for('auth_bp.register') }}">register</a>
+        {% endif %}
+    </div>
+</div>

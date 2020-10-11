@@ -1,0 +1,115 @@
+{% extends 'layout.html' %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/movie.css') }}">
+
+<div id="container">
+    <div id="movie">
+        <div id="poster">
+            <img src="{{ movie.poster_url}}" alt="{{ movie.title }}">
+        </div>
+        <div id="movie-info">
+            <div>
+                <h1>{{ movie.title }}</h1>
+                <div class="spacer"></div>
+                <nav id="genres">
+                    <p>{{ movie.runtime_formatted() }}</p>
+                    <div class="vspacer"></div>
+                    <div class="vspacer"></div>
+                    {% for genre in movie.genres %}
+                    <a class="genre" href="{{ url_for('movies_bp.movies', search_by='genre', query=genre.genre_name) }}">{{ genre.genre_name }}</a>
+                    <div class="vspacer"></div>
+                    {% endfor %}
+                </nav>
+                <p id="year">{{ movie.year }}</p>
+                <p>Directed by <a id="director" href="{{ url_for('movies_bp.movies', search_by='director', query=movie.director.director_full_name) }}">{{ movie.director.director_full_name }}</a></p>
+
+                <div class="spacer"></div>
+                <p>{{ movie.description }}</p>
+                <div class="spacer"></div>
+                <h3>Actors</h3>
+                <ul id="actors">
+                    {% for actor in movie.actors %}
+                    <li><a class="actor" href="{{ url_for('movies_bp.movies', search_by='actor', query=actor.actor_full_name) }}">{{ actor.actor_full_name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="watchlist-button">
+                {% if 'username' in session and repo.get_user(session['username']).watchlist.contains_movie(movie) %}
+                <a id="watchlist-add" href="{{ url_for('movie_bp.remove_from_watchlist', movie_id=movie.id) }}">Remove from watchlist</a>
+                {% else %}
+                <a id="watchlist-remove" href="{{ url_for('movie_bp.add_to_watchlist', movie_id=movie.id) }}">Add to watchlist</a>
+                {% endif %}
+            </div>
+
+            <div id="ratings">
+                <div id="external_rating">
+                    <i id="rating_icon" class="material-icons">grade</i>
+                    <p>{{ movie.external_rating }} ({{ movie.rating_votes }} votes)</p>
+                </div>
+                <p>Metascore: {{ movie.metascore }}</p>
+                <p>Revenue: ${{ movie.revenue }} million</p>
+            </div>
+        </div>
+    </div>
+    <div id="review-form-container">
+        <div id="review-form">
+            <form method="post" action="">
+                {{ form.csrf_token }}
+
+                <div id="review-rating" class="form-item">
+                     {{ form.rating(size=3) }}
+                </div>
+                <div id="review-text" class="form-item">
+                    {{ form.review_text(size=100) }}
+                </div>
+                <div id="review-submit" class="form-item">
+                    {{ form.submit }}
+                </div>
+
+            </form>
+            {% if form.rating.errors or form.review_text.errors %}
+            <ul id="review-errors">
+                {% for error in form.rating.errors %}
+                <li>
+                    {{ error }}
+                </li>
+                {% endfor %}
+                {% for error in form.review_text.errors %}
+                <li>
+                    {{ error }}
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="reviews">
+        <h3>Reviews:</h3>
+
+        <div id="review-list">
+            <ul>
+                {% for review in movie_reviews %}
+                <li>
+                    <div class="review">
+                        <div class="review-rating">
+                            {{ review.rating }}
+                        </div>
+                        <div class="review-content">
+                            <div class="review-text">
+                              {{ review.review_text }}
+                            </div>
+                            <div class="review-info">
+                                By {{ review.user }} {{ review.formatted_time() }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="spacer"></div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

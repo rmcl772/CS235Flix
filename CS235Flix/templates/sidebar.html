@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+<div id="sidebar-content">
+    <div id="logo">
+        <img src="../static/logo_small_alt.svg" alt="logo">
+    </div>
+
+    {% if 'username' in session %}
+    <div id="user-sidebar">
+        <h2>{{ repo.get_user(session['username']).user_name }}</h2>
+
+        <div class="sidebar-spacer"></div>
+
+        <p>{{ repo.get_user(session['username']).watched_movies_count() }} watched movies</p>
+        <p>Watch time: {{ repo.get_user(session['username']).watch_time_formatted() }}</p>
+
+        <p>{{ repo.get_user(session['username']).reviews_count() }} reviews</p>
+        <div class="sidebar-spacer"></div>
+
+        <div>
+            <h2>Watchlist</h2>
+            <ul id="watchlist">
+            {% for movie in repo.get_user(session['username']).watchlist %}
+                <li>
+                    <a href="{{ url_for('movie_bp.movie', movie_id=movie.id) }}">
+                        <div class="watchlist-item">
+                            {{ movie.title }}
+                        </div>
+                    </a>
+                    <div class="sidebar-spacer"></div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <h2>Recommended movies</h2>
+    <div id="recommended">
+        {% for movie in repo.get_popular_movies() %}
+        <a href="{{ url_for('movie_bp.movie', movie_id=movie.id) }}">
+            <div class="recommended-movie">
+                <div>
+                    <img class="recommended-movie-poster" src="{{ movie.poster_url}}" alt="{{ movie.title }}">
+                </div>
+                <div class="recommended-title">
+                    <p>{{ movie.title }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>

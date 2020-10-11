@@ -1,0 +1,81 @@
+#content {
+
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background: none;
+    justify-content: space-evenly;
+}
+
+.movie {
+    display: inline;
+    padding: 1px;
+    width: 300px;
+    height: 100px;
+    background: #314159;
+    border: none;
+}
+
+.movie-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.info-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.separator {
+    padding: 5px;
+    background: none;
+}
+
+.movie-year {
+    font-family: Jost, sans-serif;
+    font-size: 10px;
+    color: #D47EA1;
+}
+
+.director-name {
+    font-family: Jost, sans-serif;
+    font-size: 15px;
+    color: #D47EA1;
+}
+
+.movie-info {
+    display: inline;
+}
+
+.info {
+    padding: 5px 0 0 5px;
+}
+
+.rating-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.review-count {
+    text-align: right;
+    flex-grow: 2;
+}
+
+.rating-icon {
+    padding: 2px;
+    font-size: 15px;
+    color: #D47EA1;
+}
+
+.poster {
+    height: 100px;
+}
