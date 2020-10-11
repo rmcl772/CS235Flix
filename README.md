@@ -52,4 +52,10 @@ These variables are:
 
 `REFRESH_OMDB_POSTERS` - Enable querying of the OMDB API on initialisation.
 
+## Testing
+testing can be run (in an activated venv) by:
+```shell script
+$ python -m pytest
+```
 
+the data path is set automatically.
