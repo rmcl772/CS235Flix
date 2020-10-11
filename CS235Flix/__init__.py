@@ -1,7 +1,6 @@
-from flask import Flask, url_for
+from flask import Flask
 from CS235Flix.adapters import memory_repository as repo
 from os.path import join
-from os import stat
 
 
 def create_app(test_config=None):

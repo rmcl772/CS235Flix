@@ -166,6 +166,9 @@ def init_repo(data_dir: str):
     movie_id = 0
     movies_file = join(data_dir, "Data1000Movies.csv")
 
+    if environ["REFRESH_OMDB_POSTERS"] == "False":
+        print("To refresh / update the posters from OMDB, set REFRESH_OMDB_POSTERS in the .env file to True")
+
     with open(movies_file, "r") as movies:
         data_list = list(csv.DictReader(movies))
 
@@ -205,22 +208,23 @@ def init_repo(data_dir: str):
             movie.revenue = float(item["Revenue (Millions)"]) if item["Revenue (Millions)"] != "N/A" else None
             movie.metascore = int(item["Metascore"]) if item["Metascore"] != "N/A" else None
 
-            # if item["Poster url"] in (None, ""):
-            #     # movie poster form OMDB
-            #     print(f"Getting poster for {movie.title}")
-            #
-            #     api_key = environ["OMDB_KEY"]
-            #     data = requests.get(f"http://www.omdbapi.com/?apikey={api_key}&t={movie.title}").json()
-            #
-            #     try:
-            #         movie.poster_url = data["Poster"]
-            #         data_list[i]["Poster url"] = data["Poster"]
-            #         updated = True
-            #     except KeyError:
-            #         print(f"Couldn't get poster for {movie.title}!")
-            #
-            # else:
-            #     movie.poster_url = item["Poster url"]
+            if environ["REFRESH_OMDB_POSTERS"] == "True":
+                if item["Poster url"] in (None, ""):
+                    # movie poster form OMDB
+                    print(f"Getting poster for {movie.title}")
+
+                    api_key = environ["OMDB_KEY"]
+                    data = requests.get(f"http://www.omdbapi.com/?apikey={api_key}&t={movie.title}").json()
+
+                    try:
+                        movie.poster_url = data["Poster"]
+                        data_list[i]["Poster url"] = data["Poster"]
+                        updated = True
+                    except KeyError:
+                        print(f"Couldn't get poster for {movie.title}!")
+
+                else:
+                    movie.poster_url = item["Poster url"]
 
             movie.poster_url = item["Poster url"]
 

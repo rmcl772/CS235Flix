@@ -9,7 +9,7 @@ from CS235Flix.domainmodel.review import Review
 
 
 class RepoException(Exception):
-    def __init__(self, text=None):
+    def __init__(self):
         pass
 
 

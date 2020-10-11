@@ -1,4 +1,5 @@
 # CS235Flix
+NOTE: my pc has 4k screens so there is a possibility that things wont look the best on all screens (either too big or too small), what i made looked fine for me (https://ibb.co/g9CNyfy), hopefully it looks similar for you as well.
 
 ## Description
 CS235Flix is a web application for browsing and reviewing movies. users can search for movies by Title, Year, Genre, Actor or Director. Upon viewing a movie's page, they will be able to see all the relevant information about that movie, as well as add it to their watchlist, or write a review about it, if logged in. When searching for movies, if only one movies is found given the constraints, the user will be taken directly to that movie's page, instead of a list with one movie. 
@@ -48,5 +49,7 @@ These variables are:
 `WTF_CSRF_ENCRYPTION_KEY` - Encryption key for WTForms
 
 `OMDB_KEY` - API key for OMDB
+
+`REFRESH_OMDB_POSTERS` - Enable querying of the OMDB API on initialisation.
 
 
